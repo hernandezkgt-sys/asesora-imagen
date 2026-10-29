@@ -4,6 +4,8 @@ import * as objetivos from './pantallas/objetivos.js';
 import * as closet from './pantallas/closet.js';
 import * as probador from './pantallas/probador.js';
 import * as asesora from './pantallas/asesora.js';
+import * as outfitDia from './pantallas/outfit-dia.js';
+import { leer } from './almacen.js';
 
 const PANTALLAS = {
   perfil: { titulo: 'Mi perfil', modulo: perfil },
@@ -11,7 +13,7 @@ const PANTALLAS = {
   closet: { titulo: 'Mi clóset', modulo: closet },
   probador: { titulo: 'Probador', modulo: probador },
   asesora: { titulo: 'Tu asesora', modulo: asesora },
-  outfit: { titulo: 'Outfit del día' },
+  outfit: { titulo: 'Outfit del día', modulo: outfitDia },
 };
 
 const contenido = document.getElementById('contenido');
@@ -50,7 +52,16 @@ async function mostrarPantalla() {
 }
 
 window.addEventListener('hashchange', mostrarPantalla);
-mostrarPantalla();
+
+// Al abrir la app: si ya planeaste el outfit de hoy, empieza por "Mi día".
+async function iniciar() {
+  if (!location.hash) {
+    const plan = await leer('plan').catch(() => null);
+    if (plan?.[outfitDia.claveDia()]) history.replaceState(null, '', '#outfit');
+  }
+  mostrarPantalla();
+}
+iniciar();
 
 // Registra el "ayudante" que permite instalar la app y usarla sin internet.
 if ('serviceWorker' in navigator) {
