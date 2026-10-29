@@ -3,13 +3,14 @@ import * as perfil from './pantallas/perfil.js';
 import * as objetivos from './pantallas/objetivos.js';
 import * as closet from './pantallas/closet.js';
 import * as probador from './pantallas/probador.js';
+import * as asesora from './pantallas/asesora.js';
 
 const PANTALLAS = {
   perfil: { titulo: 'Mi perfil', modulo: perfil },
   objetivos: { titulo: 'Mis objetivos', modulo: objetivos },
   closet: { titulo: 'Mi clóset', modulo: closet },
   probador: { titulo: 'Probador', modulo: probador },
-  asesora: { titulo: 'Tu asesora' },
+  asesora: { titulo: 'Tu asesora', modulo: asesora },
   outfit: { titulo: 'Outfit del día' },
 };
 

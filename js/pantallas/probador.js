@@ -3,6 +3,7 @@ import { leer, guardar, listarPrendas, listarOutfits, guardarOutfit, borrarOutfi
 import { dibujarAvatar } from '../avatar/dibujar-avatar.js';
 import { categoria, color } from '../closet/catalogo.js';
 import { PERFIL_INICIAL } from './perfil.js';
+import { ESTILO_INICIAL, PIEZAS_VACIAS, armarOutfit, outfitVacio } from '../closet/outfits.js';
 import { mostrarAviso, textoSeguro } from '../ui.js';
 
 const CARRILES = [
@@ -13,26 +14,11 @@ const CARRILES = [
   { id: 'accesorios', nombre: 'Accesorios y bolsas', grupos: ['complementos'], varios: true },
 ];
 
-const ESTILO_INICIAL = { fajar: 'suelta', capa: 'abierta', mangas: 'normales' };
-const PIEZAS_VACIAS = { top: null, abajo: null, capa: null, zapatos: null, accesorios: [] };
-
 let urls = [];
 function urlDe(blob) {
   const url = URL.createObjectURL(blob);
   urls.push(url);
   return url;
-}
-
-// Convierte los números de prenda guardados en las prendas completas.
-function armarOutfit(piezas, estilo, porId) {
-  return {
-    top: porId.get(piezas.top) ?? null,
-    abajo: porId.get(piezas.abajo) ?? null,
-    capa: porId.get(piezas.capa) ?? null,
-    zapatos: porId.get(piezas.zapatos) ?? null,
-    accesorios: piezas.accesorios.map((id) => porId.get(id)).filter(Boolean),
-    estilo,
-  };
 }
 
 // ---------- Piezas de HTML ----------
@@ -108,8 +94,7 @@ function estilismo(outfit) {
 }
 
 function seccionGuardar(estado) {
-  const vacio = Object.values(estado.piezas).every((v) => (Array.isArray(v) ? !v.length : !v));
-  if (vacio) return '';
+  if (outfitVacio(estado.piezas)) return '';
   return `
     <section class="tarjeta">
       <h2>${estado.outfitId ? 'Este outfit' : 'Guardar outfit'}</h2>
