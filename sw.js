@@ -1,7 +1,7 @@
 // Ayudante (service worker): guarda una copia de la app en el teléfono
 // para que abra aunque no haya internet.
 // Si cambias archivos de la app, sube el número de versión.
-const CACHE = 'mi-asesora-v6';
+const CACHE = 'mi-asesora-v7';
 
 const ARCHIVOS = [
   './',

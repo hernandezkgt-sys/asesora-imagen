@@ -67,3 +67,25 @@ iniciar();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
+
+// Botón "Instalar app": aparece cuando el navegador permite instalarla.
+let invitacionInstalar = null;
+const botonInstalar = document.getElementById('boton-instalar');
+
+window.addEventListener('beforeinstallprompt', (evento) => {
+  evento.preventDefault();
+  invitacionInstalar = evento;
+  botonInstalar.hidden = false;
+});
+
+botonInstalar.addEventListener('click', async () => {
+  if (!invitacionInstalar) return;
+  invitacionInstalar.prompt();
+  await invitacionInstalar.userChoice;
+  invitacionInstalar = null;
+  botonInstalar.hidden = true;
+});
+
+window.addEventListener('appinstalled', () => {
+  botonInstalar.hidden = true;
+});

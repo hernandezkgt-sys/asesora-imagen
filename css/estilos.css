@@ -65,6 +65,38 @@ button, input { font: inherit; color: inherit; }
 
 .encabezado h1 { font-size: 26px; }
 
+.encabezado-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.boton-instalar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 4px 14px;
+  border: none;
+  border-radius: 999px;
+  background: var(--rosa);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.boton-instalar svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .contenido {
   max-width: 520px;
   margin: 0 auto;
