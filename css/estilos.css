@@ -1,0 +1,506 @@
+/* ==========================================================
+   Mi Asesora · estilos
+   Paleta rosa suave y elegante. Cambia los colores aquí arriba
+   y se actualizan en toda la app.
+   ========================================================== */
+
+:root {
+  --fondo: #FFF7F9;
+  --superficie: #FFFFFF;
+  --rosa: #B84D72;          /* botones y elementos activos */
+  --rosa-oscuro: #9C3D5F;
+  --rosa-medio: #F2BFD0;
+  --rosa-suave: #FBE7EE;
+  --texto: #3B2B31;
+  --texto-suave: #8A7479;
+  --borde: #F1DDE4;
+  --sombra: 0 6px 24px rgba(184, 77, 114, 0.08);
+  --radio: 20px;
+  --letra: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --letra-titulos: 'Playfair Display', Georgia, serif;
+  --alto-menu: 68px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--letra);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2 {
+  font-family: var(--letra-titulos);
+  font-weight: 500;
+  margin: 0;
+}
+
+button, input { font: inherit; color: inherit; }
+
+/* ---------- Encabezado ---------- */
+
+.encabezado {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: calc(14px + env(safe-area-inset-top)) 20px 6px;
+}
+
+.marca {
+  margin: 0;
+  font-family: var(--letra-titulos);
+  font-style: italic;
+  color: var(--rosa);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.encabezado h1 { font-size: 26px; }
+
+.contenido {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 16px calc(var(--alto-menu) + 32px + env(safe-area-inset-bottom));
+}
+
+/* ---------- Menú inferior (al alcance del pulgar) ---------- */
+
+.menu {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--borde);
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -4px 20px rgba(184, 77, 114, 0.06);
+}
+
+.menu a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 54px;
+  padding: 6px 0;
+  border-radius: 14px;
+  color: var(--texto-suave);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.menu svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.menu a[aria-current] {
+  color: var(--rosa);
+  background: var(--rosa-suave);
+}
+
+/* ---------- Tarjeta del avatar (se queda arriba al bajar) ---------- */
+
+.tarjeta-avatar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  margin: 0 -16px 8px;
+  padding: 4px 16px 8px;
+  background: linear-gradient(var(--fondo) 85%, rgba(255, 247, 249, 0));
+}
+
+.vista-avatar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  height: min(36vh, 330px);
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 8px;
+}
+
+.vista-avatar.con-foto { grid-template-columns: 1.2fr 1fr; }
+
+.avatar, .avatar svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.foto-referencia {
+  position: relative;
+  margin: 0;
+  min-height: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--rosa-suave);
+}
+
+.foto-referencia img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.foto-referencia figcaption {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rosa);
+}
+
+.resumen-avatar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 4px 0;
+  min-height: 26px;
+}
+
+.etiqueta {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--rosa-suave);
+  color: var(--rosa);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.estado-guardado {
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+/* ---------- Tarjetas y campos ---------- */
+
+.tarjeta {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 18px 18px 20px;
+  margin-bottom: 14px;
+}
+
+.tarjeta h2 {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.campo { margin-top: 14px; }
+.campo:first-of-type { margin-top: 4px; }
+
+.campo label, .etiqueta-campo {
+  display: block;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.campo-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.campo-encabezado output {
+  font-weight: 700;
+  color: var(--rosa);
+  font-variant-numeric: tabular-nums;
+}
+
+.opcional { font-weight: 400; color: var(--texto-suave); }
+
+.ayuda {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+input[type="text"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 16px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: var(--fondo);
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: var(--rosa-medio);
+  box-shadow: 0 0 0 3px var(--rosa-suave);
+}
+
+/* Barra deslizable con botones − y + */
+.deslizador {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.boton-redondo {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--borde);
+  border-radius: 50%;
+  background: var(--rosa-suave);
+  color: var(--rosa);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.boton-redondo:active { background: var(--rosa-medio); }
+
+input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  margin: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 6px;
+  background: var(--rosa-medio);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 6px;
+  background: var(--rosa-medio);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  margin-top: -11px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: var(--rosa);
+  box-shadow: 0 2px 8px rgba(184, 77, 114, 0.35);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: var(--rosa);
+  box-shadow: 0 2px 8px rgba(184, 77, 114, 0.35);
+}
+
+/* Opciones en forma de pastilla */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip input, .muestra input, .rostro input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--superficie);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.chip input:checked + span {
+  background: var(--rosa);
+  border-color: var(--rosa);
+  color: #fff;
+}
+
+/* Círculos de color */
+.muestras {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  justify-items: center;
+}
+
+.muestra span {
+  display: block;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.muestra input:checked + span {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--rosa);
+  transform: scale(1.05);
+}
+
+/* Formas de rostro */
+.rostros {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.rostro span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 4px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rostro svg {
+  width: 40px;
+  height: 40px;
+  fill: var(--rosa-suave);
+  stroke: var(--rosa);
+  stroke-width: 1.2;
+}
+
+.rostro input:checked + span {
+  background: var(--rosa-suave);
+  border-color: var(--rosa);
+  color: var(--rosa-oscuro);
+}
+
+.rostro input:checked + span svg { fill: #fff; }
+
+.chip input:focus-visible + span,
+.muestra input:focus-visible + span,
+.rostro input:focus-visible + span {
+  outline: 2px solid var(--rosa);
+  outline-offset: 2px;
+}
+
+/* ---------- Botones ---------- */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--rosa);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton:active { background: var(--rosa-oscuro); }
+
+.boton-secundario {
+  background: var(--rosa-suave);
+  color: var(--rosa);
+}
+
+.boton-secundario:active { background: var(--rosa-medio); }
+
+.botones-foto {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.botones-foto .boton:first-child { flex: 1; }
+
+/* ---------- Pantallas "próximamente" ---------- */
+
+.proximamente {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  margin-top: 12px;
+}
+
+.proximamente-icono {
+  font-size: 40px;
+  color: var(--rosa-medio);
+}
+
+.proximamente h2 { font-size: 22px; margin: 8px 0; }
+.proximamente p { color: var(--texto-suave); margin: 0 0 20px; }
+
+/* ---------- Avisos ---------- */
+
+.aviso {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--alto-menu) + 20px + env(safe-area-inset-bottom));
+  z-index: 30;
+  transform: translate(-50%, 20px);
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--texto);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.aviso.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

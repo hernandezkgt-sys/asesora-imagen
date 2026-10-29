@@ -1,0 +1,17 @@
+{
+  "name": "Mi Asesora de Imagen",
+  "short_name": "Mi Asesora",
+  "description": "Tu asesora de imagen personal en el bolsillo.",
+  "lang": "es",
+  "start_url": "./index.html#perfil",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFF7F9",
+  "theme_color": "#FFF7F9",
+  "icons": [
+    { "src": "iconos/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "iconos/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "iconos/icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
