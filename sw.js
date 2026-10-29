@@ -1,7 +1,7 @@
 // Ayudante (service worker): guarda una copia de la app en el teléfono
 // para que abra aunque no haya internet.
 // Si cambias archivos de la app, sube el número de versión.
-const CACHE = 'mi-asesora-v3';
+const CACHE = 'mi-asesora-v4';
 
 const ARCHIVOS = [
   './',
@@ -14,11 +14,13 @@ const ARCHIVOS = [
   'js/fotos.js',
   'js/closet/catalogo.js',
   'js/pantallas/closet.js',
+  'js/pantallas/probador.js',
   'js/pantallas/perfil.js',
   'js/pantallas/objetivos.js',
   'js/asesoria/objetivos.js',
   'js/avatar/dibujar-avatar.js',
   'js/avatar/partes.js',
+  'js/avatar/ropa.js',
   'iconos/icono.svg',
   'iconos/icono-180.png',
   'iconos/icono-192.png',

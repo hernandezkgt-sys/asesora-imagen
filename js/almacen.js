@@ -2,7 +2,7 @@
 // No hay servidor: nada sale del dispositivo.
 
 const NOMBRE_BD = 'asesora-imagen';
-const VERSION_BD = 2;
+const VERSION_BD = 3;
 
 let conexion;
 
@@ -18,8 +18,16 @@ function abrir() {
         if (!bd.objectStoreNames.contains('prendas')) {
           bd.createObjectStore('prendas', { keyPath: 'id', autoIncrement: true });
         }
+        // "outfits" guarda las combinaciones armadas en el Probador.
+        if (!bd.objectStoreNames.contains('outfits')) {
+          bd.createObjectStore('outfits', { keyPath: 'id', autoIncrement: true });
+        }
       };
-      peticion.onsuccess = () => resolver(peticion.result);
+      peticion.onsuccess = () => {
+        // Si otra pestaña abre una versión más nueva de la app, cede el paso.
+        peticion.result.onversionchange = () => peticion.result.close();
+        resolver(peticion.result);
+      };
       peticion.onerror = () => rechazar(peticion.error);
     });
     // Pide al navegador que no borre estos datos cuando falte espacio.
@@ -47,3 +55,7 @@ export const leerPrenda = (id) => operacion('prendas', 'readonly', (cajon) => ca
 // Devuelve el número de la prenda (nuevo si es la primera vez que se guarda).
 export const guardarPrenda = (prenda) => operacion('prendas', 'readwrite', (cajon) => cajon.put(prenda));
 export const borrarPrenda = (id) => operacion('prendas', 'readwrite', (cajon) => cajon.delete(id));
+
+export const listarOutfits = () => operacion('outfits', 'readonly', (cajon) => cajon.getAll());
+export const guardarOutfit = (outfit) => operacion('outfits', 'readwrite', (cajon) => cajon.put(outfit));
+export const borrarOutfit = (id) => operacion('outfits', 'readwrite', (cajon) => cajon.delete(id));

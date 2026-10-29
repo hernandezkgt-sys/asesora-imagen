@@ -4,6 +4,7 @@ import {
   formaRostro, caminoRostro, rasgosCara,
   caminoCabelloAtras, caminoCabelloFrente, brilloCabello,
 } from './partes.js';
+import { vestir } from './ropa.js';
 
 // El lienzo mide 240 x 400. Cada centímetro de estatura = 1.9 puntos.
 export const ANCHO_LIENZO = 240;
@@ -233,8 +234,10 @@ function regla(m) {
 }
 
 // Devuelve el avatar completo como texto SVG.
-export function dibujarAvatar(perfil, { id = 'avatar', conRegla = true } = {}) {
+// "outfit" (opcional) son las prendas que lleva puestas; ver ropa.js.
+export function dibujarAvatar(perfil, { id = 'avatar', conRegla = true, outfit = null } = {}) {
   const m = calcularMedidas(perfil);
+  const ropa = outfit ? vestir(m, outfit, id) : { defs: '', cuerpo: '', brazos: '', cabeza: '' };
   const piel = perfil.piel || '#EFC0A0';
   const cabello = perfil.cabelloColor || '#3B2A20';
   const largo = perfil.cabelloLargo || 'hombros';
@@ -254,6 +257,7 @@ export function dibujarAvatar(perfil, { id = 'avatar', conRegla = true } = {}) {
       <stop offset="100%" stop-color="#FCE3EC" stop-opacity="0"/>
     </radialGradient>
     <clipPath id="${id}-silueta"><path d="${cuerpo}"/></clipPath>
+    ${ropa.defs}
   </defs>
 
   <circle cx="${cx}" cy="${(m.arriba + m.alto * 0.45).toFixed(1)}" r="${(m.alto * 0.42).toFixed(1)}" fill="url(#${id}-fondo)"/>
@@ -263,20 +267,24 @@ export function dibujarAvatar(perfil, { id = 'avatar', conRegla = true } = {}) {
   <path d="${caminoCabelloAtras(largo, m)}" fill="${oscurecer(cabello, 0.15)}"/>
 
   <path d="${cuerpo}" fill="${piel}" stroke="${contornoPiel}" stroke-width="0.9" stroke-linejoin="round"/>
-  <g clip-path="url(#${id}-silueta)">
+  ${ropa.cubreBody ? '' : `<g clip-path="url(#${id}-silueta)">
     <path d="${caminoBody(m)}" fill="${colorBody}"/>
     <path d="${lineasBusto(m, perfil.busto)}" fill="none" stroke="${oscurecer(colorBody, 0.18)}" stroke-width="0.8" stroke-linecap="round"/>
-  </g>
+  </g>`}
   <path d="${cuerpo}" fill="none" stroke="${contornoPiel}" stroke-width="0.9" stroke-linejoin="round"/>
+  <ellipse cx="${cx}" cy="${(cy + ry * 0.98).toFixed(1)}" rx="${(rx * 0.42).toFixed(1)}" ry="${(ry * 0.16).toFixed(1)}" fill="${oscurecer(piel, 0.12)}"/>
+  ${ropa.cuerpo}
 
   <path d="${curvaCerrada(puntosBrazo(m, 1))}" fill="${piel}" stroke="${contornoPiel}" stroke-width="0.9" stroke-linejoin="round"/>
   <path d="${curvaCerrada(puntosBrazo(m, -1))}" fill="${piel}" stroke="${contornoPiel}" stroke-width="0.9" stroke-linejoin="round"/>
 
-  <ellipse cx="${cx}" cy="${(cy + ry * 0.98).toFixed(1)}" rx="${(rx * 0.42).toFixed(1)}" ry="${(ry * 0.16).toFixed(1)}" fill="${oscurecer(piel, 0.12)}"/>
+  ${ropa.brazos}
+
   <path d="${caminoRostro(perfil.rostro, cx, cy, rx, ry)}" fill="${piel}" stroke="${contornoPiel}" stroke-width="0.9"/>
   ${rasgosCara({ cx, cy, rx, ry, piel, cabello })}
 
   <path d="${caminoCabelloFrente(largo, m)}" fill="${cabello}"/>
   <path d="${brilloCabello(m)}" fill="none" stroke="${aclarar(cabello, 0.5)}" stroke-width="${(ry * 0.07).toFixed(1)}" stroke-linecap="round" opacity="0.45"/>
+  ${ropa.cabeza}
 </svg>`;
 }
