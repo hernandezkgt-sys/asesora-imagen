@@ -457,6 +457,169 @@ input[type="range"]::-moz-range-thumb {
 
 .botones-foto .boton:first-child { flex: 1; }
 
+/* ---------- Objetivos ---------- */
+
+.intro {
+  margin: 4px 4px 6px;
+  color: var(--texto-suave);
+}
+
+.resumen-objetivos {
+  margin: 0 0 14px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--rosa-suave);
+  color: var(--rosa-oscuro);
+  font-size: 15px;
+}
+
+.aviso-perfil {
+  margin: 0 4px 14px;
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+.aviso-perfil a { color: var(--rosa); font-weight: 700; }
+
+.objetivos {
+  display: grid;
+  gap: 12px;
+}
+
+.objetivo {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  transition: border-color 0.15s;
+}
+
+.objetivo.elegido { border-color: var(--rosa-medio); }
+
+.objetivo-cabecera {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px 1fr 28px;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.objetivo-cabecera input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.objetivo-icono {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--rosa-suave);
+  color: var(--rosa);
+}
+
+.objetivo-icono svg,
+.boton-principal svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.objetivo.elegido .objetivo-icono {
+  background: var(--rosa);
+  color: #fff;
+}
+
+.objetivo-texto {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.objetivo-texto strong { font-size: 16px; }
+
+.objetivo-texto > span {
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+.objetivo-texto .sugerido {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: #FFF1E8;
+  color: #A3532A;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.casilla {
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--rosa-medio);
+  border-radius: 50%;
+}
+
+.objetivo.elegido .casilla {
+  border-color: var(--rosa);
+  background: var(--rosa) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 16px no-repeat;
+}
+
+.objetivo-cabecera input:focus-visible ~ .casilla {
+  outline: 2px solid var(--rosa);
+  outline-offset: 3px;
+}
+
+.objetivo-detalle {
+  display: grid;
+  gap: 12px;
+  padding: 0 16px 16px 78px;
+}
+
+.tip {
+  margin: 0;
+  font-size: 14.5px;
+}
+
+.tip b { color: var(--rosa); }
+
+.boton-principal {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 6px 14px;
+  border: 1px solid var(--rosa-medio);
+  border-radius: 999px;
+  background: var(--superficie);
+  color: var(--rosa);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.boton-principal[aria-pressed="true"] {
+  background: #FFF6DA;
+  border-color: #E8C15A;
+  color: #8A6510;
+}
+
+.boton-principal[aria-pressed="true"] svg { fill: #E8C15A; stroke: #C9A03A; }
+
+@media (max-width: 380px) {
+  .objetivo-detalle { padding-left: 16px; }
+}
+
 /* ---------- Pantallas "próximamente" ---------- */
 
 .proximamente {
@@ -491,6 +654,7 @@ input[type="range"]::-moz-range-thumb {
   color: #fff;
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s, transform 0.2s;

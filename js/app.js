@@ -1,9 +1,10 @@
 // El "recepcionista": muestra la pantalla que corresponde según el menú.
 import * as perfil from './pantallas/perfil.js';
+import * as objetivos from './pantallas/objetivos.js';
 
 const PANTALLAS = {
   perfil: { titulo: 'Mi perfil', modulo: perfil },
-  objetivos: { titulo: 'Mis objetivos' },
+  objetivos: { titulo: 'Mis objetivos', modulo: objetivos },
   closet: { titulo: 'Mi clóset' },
   probador: { titulo: 'Probador' },
   asesora: { titulo: 'Tu asesora' },
@@ -26,8 +27,8 @@ async function mostrarPantalla() {
   document.title = `${pantalla.titulo} · Mi Asesora`;
   document.querySelectorAll('.menu a').forEach((enlace) => {
     const activo = enlace.getAttribute('href') === `#${clave}`;
-    enlace.toggleAttribute('aria-current', activo);
     if (activo) enlace.setAttribute('aria-current', 'page');
+    else enlace.removeAttribute('aria-current');
   });
 
   contenido.innerHTML = '';
