@@ -3,6 +3,7 @@ import { leer, guardar, borrar } from '../almacen.js';
 import { dibujarAvatar } from '../avatar/dibujar-avatar.js';
 import { caminoRostro, formaRostro } from '../avatar/partes.js';
 import { mostrarAviso, textoSeguro } from '../ui.js';
+import { reducirFoto } from '../fotos.js';
 
 export const PERFIL_INICIAL = {
   nombre: '',
@@ -213,18 +214,6 @@ function plantilla(perfil) {
 }
 
 // ---------- Foto ----------
-
-// Achica la foto antes de guardarla para no llenar la memoria del teléfono.
-async function reducirFoto(archivo, maximo = 1400) {
-  const imagen = await createImageBitmap(archivo);
-  const escala = Math.min(1, maximo / Math.max(imagen.width, imagen.height));
-  const lienzo = document.createElement('canvas');
-  lienzo.width = Math.round(imagen.width * escala);
-  lienzo.height = Math.round(imagen.height * escala);
-  lienzo.getContext('2d').drawImage(imagen, 0, 0, lienzo.width, lienzo.height);
-  imagen.close();
-  return new Promise((resolver) => lienzo.toBlob(resolver, 'image/jpeg', 0.85));
-}
 
 function mostrarFoto(foto) {
   if (urlFoto) URL.revokeObjectURL(urlFoto);

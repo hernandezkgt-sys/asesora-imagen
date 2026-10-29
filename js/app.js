@@ -1,11 +1,12 @@
 // El "recepcionista": muestra la pantalla que corresponde según el menú.
 import * as perfil from './pantallas/perfil.js';
 import * as objetivos from './pantallas/objetivos.js';
+import * as closet from './pantallas/closet.js';
 
 const PANTALLAS = {
   perfil: { titulo: 'Mi perfil', modulo: perfil },
   objetivos: { titulo: 'Mis objetivos', modulo: objetivos },
-  closet: { titulo: 'Mi clóset' },
+  closet: { titulo: 'Mi clóset', modulo: closet },
   probador: { titulo: 'Probador' },
   asesora: { titulo: 'Tu asesora' },
   outfit: { titulo: 'Outfit del día' },
